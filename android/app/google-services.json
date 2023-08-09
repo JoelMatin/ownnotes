@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "342334078135",
+    "project_id": "ownnotes-pacha",
+    "storage_bucket": "ownnotes-pacha.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342334078135:android:87e6d360dac69c0b30e132",
+        "android_client_info": {
+          "package_name": "com.secondappever.ownnotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342334078135-qdmvdjon9jsqn5j9bhq597sljs09gt45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoO23T7htHu3CH3sz9S-CIg_izurIkEp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342334078135-qdmvdjon9jsqn5j9bhq597sljs09gt45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
