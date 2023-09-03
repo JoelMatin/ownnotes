@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ownnotes/constants/routes.dart';
+import 'package:ownnotes/services/auth/auth_service.dart';
 import 'package:ownnotes/views/login_view.dart';
+import 'package:ownnotes/views/notes_view.dart';
 import 'package:ownnotes/views/register_view.dart';
 import 'package:ownnotes/views/verify_email_view.dart';
 import "dart:developer" as devtools show log;
@@ -26,64 +26,20 @@ void main() {
   ));
 }
 
-enum MenuAction { logout }
-
-class NotesView extends StatefulWidget {
-  const NotesView({super.key});
-
-  @override
-  State<NotesView> createState() => _NotesViewState();
-}
-
-class _NotesViewState extends State<NotesView> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Main UI"),
-        actions: [
-          PopupMenuButton<MenuAction>(
-            onSelected: (value) async {
-              switch (value) {
-                case MenuAction.logout:
-                  final shouldLogout = await showLogOutDialog(context);
-                  devtools.log(shouldLogout.toString());
-                  if (shouldLogout) {
-                    await FirebaseAuth.instance.signOut();
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil(loginRoute, (_) => false);
-                  }
-              }
-            },
-            itemBuilder: (context) {
-              return const [
-                PopupMenuItem<MenuAction>(
-                    value: MenuAction.logout, child: Text("Log Out"))
-              ];
-            },
-          )
-        ],
-      ),
-      body: const Text("Hello World"),
-    );
-  }
-}
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform),
+      future: AuthService.firebase().initialize(),
       builder: (context, snapshot) {
         //snapshot is the way to get the result of the future
         switch (snapshot.connectionState) {
           case ConnectionState.done:
-            final user = FirebaseAuth.instance.currentUser;
+            final user = AuthService.firebase().currentUser;
             if (user != null) {
-              if (user.emailVerified) {
+              if (user.isEmailVerified) {
                 return const NotesView();
               } else {
                 return const VerifyEmailView();
