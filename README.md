@@ -1,6 +1,6 @@
 # ownnotes
 
-A new Flutter project.
+I followed this guide to complement my coding skills for apps. The goal is to create a note taking app both functionnal on IOS and Android which implements different views, transitions, password management, some back end etc 
 
 ## Getting Started
 
